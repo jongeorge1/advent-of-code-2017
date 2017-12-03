@@ -13,13 +13,7 @@ describe('day 3.2', () => {
     });
 
     it('Square 2 => 1', () => {
-      expect(sut.populateValue(2)).toBe(1);
-    });
-    it('Square 1 => 1', () => {
-      expect(sut.populateValue(1)).toBe(1);
-    });
-
-    it('Square 2 => 1', () => {
+      sut.populateValue(1);
       expect(sut.populateValue(2)).toBe(1);
     });
 
