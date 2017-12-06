@@ -1,5 +1,8 @@
 # Advent of Code 2017
+
 https://adventofcode.com/2017
+
+http://adventofcode.com/2017/leaderboard/private/view/32690
 
 1. Clone repo
 
