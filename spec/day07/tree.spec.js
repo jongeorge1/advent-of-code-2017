@@ -8,5 +8,10 @@ describe('day 7.1', () => {
       let tree = new Tree(input);
       expect(tree.programs.length).toBe(13);
     });
+
+    it('should have the expected root node', () => {
+      let tree = new Tree(input);
+      expect(tree.root.name).toBe('tknk');
+    });
   });
 });
