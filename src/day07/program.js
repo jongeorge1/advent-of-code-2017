@@ -21,6 +21,15 @@ class Program {
     return !!this.children.map(el => el.totalWeight()).reduce((a, b) => a === b ? a : NaN);
   }
 
+  depth() {
+    // How deep in the tree is this node?
+    if (this.parent) {
+      return this.parent.depth() + 1;
+    }
+
+    return 1;
+  }
+
   totalWeight() {
     return this.weight + this.children.reduce((acc, el) => {
       acc+= el.totalWeight();

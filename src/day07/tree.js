@@ -27,6 +27,12 @@ class Tree {
       });
     }
   }
+
+  maxDepth() {
+    let leaves = this.programs.filter(el => el.children.length === 0);
+    let leafDepths = leaves.map(el => el.depth());
+    return Math.max(...leafDepths);
+  }
 }
 
 module.exports = Tree;
