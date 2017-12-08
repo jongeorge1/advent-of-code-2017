@@ -1,10 +1,10 @@
-let Day10Part1 = require('../../src/day10/part1');
+let Day09Part1 = require('../../src/day09/part1');
 
-describe('day 10.1', () => {
+describe('day 9.1', () => {
   let input = '';
   
   beforeEach(() => {
-    sut = new Day10Part1();
+    sut = new Day09Part1();
   });
 
   describe('the AoC test case', () => {
