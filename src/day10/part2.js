@@ -1,5 +1,22 @@
+let Hasher = require('./hasher');
+
 class Day10Part2 {
-  process(input) {
+  buildLengthsArray(input) {
+    let bytes = input.split('').map(el => el.charCodeAt(0));
+    bytes.push(17, 31, 73, 47, 23);
+    return bytes;
+  }
+
+  process(input, length) {
+    length = length || 256;
+    let hasher = new Hasher(length);
+    let lengths = this.buildLengthsArray(input);
+
+    for (let i = 0; i < 64; i++) {
+      lengths.map(el => hasher.hash(+el));
+    }
+
+    return hasher.hex;
   }
 }
 
