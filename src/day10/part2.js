@@ -8,8 +8,7 @@ class Day10Part2 {
   }
 
   process(input, length) {
-    length = length || 256;
-    let hasher = new Hasher(length);
+    let hasher = new Hasher(length || 256);
     let lengths = this.buildLengthsArray(input);
 
     for (let i = 0; i < 64; i++) {

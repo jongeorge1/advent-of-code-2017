@@ -2,31 +2,22 @@ require('string.prototype.padstart').shim();
 
 class Hasher {
   constructor(listSize) {
-    console.log(listSize);
-    this.state = [];
     this.listSize = listSize || 256;
-    for (let i = 0; i < this.listSize; i++) {
-      this.state.push(i);
-    }
-
-    this.position = 0;
-    this.skip = 0;
+    this.state = Array(...Array(this.listSize)).map((el, i) => i);
+    this.position = this.skip = 0;
   }
 
   hash(length) {
-    // Get the array to reverse
-    let arrayToReverse = [];
+    let reversedSection = [];
 
     for (var i = 0; i < length; i++) {
       let index = (this.position + i) % this.listSize;
-      arrayToReverse[i] = this.state[index];
+      reversedSection[length - i - 1] = this.state[index];
     }
-
-    arrayToReverse.reverse();
     
     for (var i = 0; i < length; i++) {
       let index = (this.position + i) % this.listSize;
-      this.state[index] = arrayToReverse[i];
+      this.state[index] = reversedSection[i];
     }
 
     this.position += (length + this.skip);
@@ -34,29 +25,16 @@ class Hasher {
   }
 
   denseBlock(input) {
-    let val = input[0];
-    for (let i = 1; i < input.length; i++) {
-      val = val ^ input[i];
-    }
-    
-    return val;
+    return input.reduce((acc, el) => acc ^ el);
   }
 
   get denseState() {
-    let result = [];
-    for (let block = 0; block < 16; block++) {
-      let blockVals = this.state.slice(block * 16, (block * 16) + 16);
-      result.push(this.denseBlock(blockVals));
-    }
-
-    return result;
+    return Array(...Array(16)).map((el, i) => this.denseBlock(this.state.slice(i * 16, (i * 16) + 16)));
   }
 
   get hex() {
     return this.denseState.map(el => el.toString(16).padStart(2, '0')).join('');
   }
 }
-
-
 
 module.exports = Hasher;

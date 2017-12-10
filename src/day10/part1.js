@@ -2,8 +2,7 @@ let Hasher = require('./hasher');
 
 class Day10Part1 {
   process(input, length) {
-    length = length || 256;
-    let hasher = new Hasher(length);
+    let hasher = new Hasher(length || 256);
 
     input.split(',').map(el => hasher.hash(+el));
     return hasher.state[0] * hasher.state[1];

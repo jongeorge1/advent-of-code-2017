@@ -2,9 +2,11 @@ let Hasher = require('../../src/day10/hasher');
 
 describe('the hasher module', () => {
   describe('the denseBlock function', () => {
-    it('should behave as expected', () => {
-      let sut = new Hasher(5);
-      expect(sut.denseBlock([65, 27, 9, 1, 4, 3, 40, 50, 91, 7, 6, 0, 2, 5, 68, 22])).toBe(64);
+    describe('when given an array of numbers', () => {
+      it('should return the result of XORing them all together', () => {
+        let sut = new Hasher(5);
+        expect(sut.denseBlock([65, 27, 9, 1, 4, 3, 40, 50, 91, 7, 6, 0, 2, 5, 68, 22])).toBe(64);
+      });
     });
   });
 
