@@ -1,38 +1,24 @@
 class Day11Part2 {
   constructor() {
     this.furthestDistanceFromHome = 0;
+
     this.position = {
       x: 0,
       y: 0
     };
+
+    this.moves = {
+      n: pos => pos.y += 2,
+      s: pos => pos.y -=2,
+      ne: pos => { pos.x++; pos.y++ },
+      se: pos => { pos.x++; pos.y-- },
+      nw: pos => { pos.x--; pos.y++ },
+      sw:  pos => { pos.x--; pos.y-- },
+    };
   }
 
-  step(direction, pos) {
-    pos = pos || this.position;
-    switch (direction) {
-      case 'n':
-        pos.y += 2;
-        break;
-      case 's':
-        pos.y += -2;
-        break;
-      case 'ne':
-        pos.x++;
-        pos.y++;
-        break;
-      case 'nw':
-        pos.x--;
-        pos.y++;
-        break;
-      case 'se':
-        pos.x++;
-        pos.y--;
-        break;
-      case 'sw':
-        pos.x--;
-        pos.y--;
-        break;
-    }
+  step(direction) {
+    this.moves[direction](this.position);
   }
 
   get movesFromHome() {
@@ -45,11 +31,7 @@ class Day11Part2 {
   followPath(directions) {
     directions.map(el => {
       this.step(el);
-      
-      let distance = this.movesFromHome;
-      if (distance > this.furthestDistanceFromHome) {
-        this.furthestDistanceFromHome = distance;
-      }
+      this.furthestDistanceFromHome = Math.max(this.movesFromHome, this.furthestDistanceFromHome);
     });
   }
 
