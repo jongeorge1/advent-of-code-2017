@@ -39,37 +39,10 @@ class Day11Part1 {
   }
 
   get movesFromHome() {
-    let steps = 0;
-    let pos = {
-      x: this.position.x,
-      y: this.position.y
-    };
+    let absx = Math.abs(this.position.x);
+    let absy = Math.abs(this.position.y);
     
-    while (pos.x !== 0 || pos.y !== 0) {
-      if (pos.x > 0) {
-        if (pos.y > 0) {
-          this.step('sw', pos);
-        } else{
-          this.step('nw', pos);
-        }
-      } else if (pos.x < 0) {
-        if (pos.y > 0) {
-          this.step('se', pos);
-        } else{
-          this.step('ne', pos);
-        }
-      } else {
-        if (pos.y > 0) {
-          this.step('s', pos);
-        } else{
-          this.step('n', pos);
-        }
-      }
-
-      steps++;
-    }
-
-    return steps;
+    return absx + ((absy - absx) / 2);
   }
 
   process(input) {
