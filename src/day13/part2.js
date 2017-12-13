@@ -21,7 +21,7 @@ class Day13Part2 {
       for (let i = 0; i < layers.length; i++) {
         if (layers[i] && layers[i].positionAfter(delay + i) === 0) {
           caught = true;
-          continue;
+          break;
         }
       }
 
