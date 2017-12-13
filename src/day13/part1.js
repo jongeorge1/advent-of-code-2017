@@ -13,11 +13,9 @@ class Day13Part1 {
     var severity = 0;
 
     for (let i = 0; i < layers.length; i++) {
-      if (layers[i] && layers[i].position === 0) {
+      if (layers[i] && layers[i].positionAfter(i) === 0) {
         severity += layers[i].hitSeverity;
       }
-
-      layers.map(el => { if (el) el.move(); });
     }
 
     return severity;

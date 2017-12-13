@@ -16,14 +16,6 @@ describe('day 13 layer', () => {
     it('should set its size to the specified value', () => {
       expect(sut.size).toBe(4);
     });
-
-    it('should set its scanner position to 0', () => {
-      expect(sut.position).toBe(0);
-    });
-
-    it('should be moving in a down direction', () => {
-      expect(sut.direction).toBe(1);
-    })
   });
 
   describe('when asked for hit severity', () => {
@@ -33,75 +25,41 @@ describe('day 13 layer', () => {
     });
   });
 
-  describe('when told to move', () => {
-    describe('and the direction is down', () => {
-      describe('and the scanner is at the top', () => {
-        beforeEach(() => {
-          sut = new Layer(1, 4);
-          sut.move();
-        });
-
-        it('should move down one step', () => {
-          expect(sut.position).toBe(1);
-        });
-
-        it('should still be moving down', () => {
-          expect(sut.direction).toBe(1);
-        });
-      });
-
-      describe('and the scanner is in the last but one position', () => {
-        beforeEach(() => {
-          sut = new Layer(1, 4);
-          sut.move();
-          sut.move();
-          sut.move();
-        });
-        
-        it('should move to the last position', () => {
-          expect(sut.position).toBe(3);
-        })
-
-        it('should be moving up', () => {
-          expect(sut.direction).toBe(-1);
-        });
-      });
+  describe('when told to position', () => {
+    beforeEach(() => {
+      sut = new Layer(1, 4);
     });
 
-    describe('and the direction is up', () => {
-      describe('and the scanner is at the bottom', () => {
-        beforeEach(() => {
-          sut = new Layer(1, 4);
-          sut.position = 3;
-          sut.direction = -1;
-          sut.move();
-        });
-        
-        it('should move up one step', () => {
-          expect(sut.position).toBe(2);
-        });
+    it('after 0 it should return 0', () => {
+      expect(sut.positionAfter(0)).toBe(0);
+    });
 
-        it('should still be moving up', () => {
-          expect(sut.direction).toBe(-1);
-        });
-      });
+    it('after 1 it should return 1', () => {
+      expect(sut.positionAfter(1)).toBe(1);
+    });
 
-      describe('and the scanner is in the second position', () => {
-        beforeEach(() => {
-          sut = new Layer(1, 4);
-          sut.position = 1;
-          sut.direction = -1;
-          sut.move();
-        });
-        
-        it('should move to the first position', () => {
-          expect(sut.position).toBe(0);
-        })
+    it('after 2 it should return 2', () => {
+      expect(sut.positionAfter(2)).toBe(2);
+    });
 
-        it('should be moving down', () => {
-          expect(sut.direction).toBe(1);
-        });
-      });
+    it('after 3 it should return 3', () => {
+      expect(sut.positionAfter(3)).toBe(3);
+    });
+
+    it('after 4 it should return 2', () => {
+      expect(sut.positionAfter(4)).toBe(2);
+    });
+
+    it('after 5 it should return 1', () => {
+      expect(sut.positionAfter(5)).toBe(1);
+    });
+
+    it('after 6 it should return 0', () => {
+      expect(sut.positionAfter(6)).toBe(0);
+    });
+
+    it('after 7 it should return 1', () => {
+      expect(sut.positionAfter(7)).toBe(1);
     });
   });
 });
