@@ -12,5 +12,8 @@
     "jasmine": "^2.8.0",
     "node-stopwatch": "0.0.1",
     "string.prototype.padstart": "^3.0.0"
+  },
+  "dependencies": {
+    "hex-to-binary": "^1.0.1"
   }
 }
