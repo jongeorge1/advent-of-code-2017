@@ -6,8 +6,9 @@ describe('day 14.1', () => {
   });
 
   describe('the AoC test case', () => {
-    it('should return...', () => {
-      // let result = sut.process('flqrgnkx');
-    });
+    // it('should return 1242', () => {
+    //   let result = sut.process('flqrgnkx');
+    //   expect(result).toBe(1242);
+    // });
   });
 });
