@@ -14,20 +14,10 @@ describe('the map generator module', () => {
 
     beforeEach(() => {
       sut = new MapGenerator('input');
-      spyOn(sut, 'stringToBinary').and.returnValue('binary');
-      spyOn(sut.hasher, 'hash').and.returnValue('hash');
     });
 
-    it('should generate hashes using the hasher', () => {
-      expect(sut.hasher.hash).toHaveBeenCalled();
-    });
-    
     it('should generate 128 hashes', () => {
       expect(sut.map.length).toBe(128);
-    });
-
-    it('should convert each hash to binary', () => {
-      expect(sut.stringToBinary).toHaveBeenCalled();
     });
   });
 });

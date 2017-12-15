@@ -22,6 +22,10 @@ class MapGenerator {
   stringToBinary(input) {
     return input.split('').map(el => this.charToBinary(el)).join('');
   }
+
+  log() {
+    this.map.map(el => console.log(el));
+  }
 }
 
 module.exports = MapGenerator;
