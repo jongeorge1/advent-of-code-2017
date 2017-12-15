@@ -49,22 +49,4 @@ describe('the generator module', () => {
       expect(sut.current).toBe(740335192);
     });
   });
-
-  describe('when asked for the current value as binary', () => {
-    it('should return the binary equivalent of the number', () => {
-      sut = new Generator(65, 16807);
-      sut.generate();
-      console.log(sut.current);
-      expect(sut.currentBinary).toBe('00000000000100001010101101100111');
-    })
-  });
-
-  describe('when asked for low 16 bits of the current value as binary', () => {
-    it('should return expected binary number', () => {
-      sut = new Generator(65, 16807);
-      sut.generate();
-      console.log(sut.current);
-      expect(sut.currentBinaryLower16).toBe('1010101101100111');
-    })
-  });
 });

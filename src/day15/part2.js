@@ -17,7 +17,7 @@ class Day15Part2 {
       genA.generate();
       genB.generate();
 
-      if (genA.currentBinaryLower16 === genB.currentBinaryLower16) {
+      if ((genA.current & 65535) === (genB.current & 65535)) {
         matches++;
       }
     }
