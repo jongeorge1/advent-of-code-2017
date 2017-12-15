@@ -6,9 +6,9 @@ describe('day 14.1', () => {
   });
 
   describe('the AoC test case', () => {
-    describe('when told to find the number of matches in the first 5 iterations', () => {
+    describe('when told to find the number of matches in the first 1056 iterations', () => {
       it('should return 1', () => {
-        expect(sut.process(65, 8921, 5)).toBe(1);
+        expect(sut.process(65, 8921, 1056)).toBe(1);
       });
     });
   });

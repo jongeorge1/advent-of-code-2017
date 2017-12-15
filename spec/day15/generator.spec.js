@@ -34,6 +34,22 @@ describe('the generator module', () => {
     });
   });
 
+  describe('when given the test values from AoC using a divisor of 4', () => {
+    it('should return the expected values', () => {
+      sut = new Generator(65, 16807, 4);
+      sut.generate();
+      expect(sut.current).toBe(1352636452);
+      sut.generate();
+      expect(sut.current).toBe(1992081072);
+      sut.generate();
+      expect(sut.current).toBe(530830436);
+      sut.generate();
+      expect(sut.current).toBe(1980017072);
+      sut.generate();
+      expect(sut.current).toBe(740335192);
+    });
+  });
+
   describe('when asked for the current value as binary', () => {
     it('should return the binary equivalent of the number', () => {
       sut = new Generator(65, 16807);
