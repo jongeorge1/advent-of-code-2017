@@ -21,10 +21,11 @@ class Day17Part2 {
     this.value++;
   }
 
-  process(input) {
+  process(input, iterations) {
     input = +input;
+    iterations = iterations || 50000000;
 
-    for (let i = 0; i < 50000000; i++) {
+    for (let i = 0; i < iterations; i++) {
       this.cycle(input);
     }
 
