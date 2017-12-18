@@ -7,10 +7,13 @@ class Day18Part2 {
     let duetEnded;
 
     do {
-      cmd = instructions[duet.nextInstruction];
-      duet[cmd.cmd](cmd.reg, cmd.val);
       duetEnded = duet.nextInstruction < 0 || duet.nextInstruction >= instructions.length;
-      commandsThisLoop++;
+      
+      if (!duetEnded) {
+        cmd = instructions[duet.nextInstruction];
+        duet[cmd.cmd](cmd.reg, cmd.val);
+        commandsThisLoop++;
+      }
     } while (!duet.waiting && !duetEnded)
 
     return commandsThisLoop;
