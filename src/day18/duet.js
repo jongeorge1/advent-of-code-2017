@@ -46,7 +46,7 @@ class Duet {
   }
 
   jgz(id, val) {
-    if (this.register(id) > 0) {
+    if (this.numberOrRegister(id) > 0) {
       this.nextInstruction += this.numberOrRegister(val);
     } else {
       this.nextInstruction++;
