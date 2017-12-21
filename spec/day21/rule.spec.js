@@ -4,6 +4,18 @@ let Block = require('../../src/day21/block');
 describe('day 21 rule class', () => {
   let sut;
 
+  describe('when calling get all rotations', () => {
+    it('should return the expected rotations', () => {
+      sut = new Rule();
+      let result = sut.getAllRotations('.#./..#/###');
+      expect(result.length).toBe(8);
+      expect(result.indexOf('.#...####')).not.toBe(-1);
+      expect(result.indexOf('.#.#..###')).not.toBe(-1);
+      expect(result.indexOf('#..#.###.')).not.toBe(-1);
+      expect(result.indexOf('###..#.#.')).not.toBe(-1);
+    });
+  });
+
   describe('when created', () => {
     describe('with a two by two rule', () => {
       describe('and all rotations are identical', () => {
@@ -54,14 +66,10 @@ describe('day 21 rule class', () => {
       describe('and no rotations are identical', () => {
         it('should have eight match strings', () => {
           sut = new Rule('#../.#./... => ..../....');
-          expect(sut.matches.length).toBe(8);
+          expect(sut.matches.length).toBe(4);
           expect(sut.matches.indexOf('#...#....')).not.toBe(-1);
-          expect(sut.matches.indexOf('.#..#....')).not.toBe(-1);
           expect(sut.matches.indexOf('..#.#....')).not.toBe(-1);
-          expect(sut.matches.indexOf('...##....')).not.toBe(-1);
-          expect(sut.matches.indexOf('....##...')).not.toBe(-1);
           expect(sut.matches.indexOf('....#.#..')).not.toBe(-1);
-          expect(sut.matches.indexOf('....#..#.')).not.toBe(-1);
           expect(sut.matches.indexOf('....#...#')).not.toBe(-1);
         });
       });
@@ -69,10 +77,8 @@ describe('day 21 rule class', () => {
       describe('and some rotations are identical', () => {
         it('should have the expected number of match strings', () => {
           sut = new Rule('##./#.#/.## => ..../....');
-          expect(sut.matches.length).toBe(4);
+          expect(sut.matches.length).toBe(2);
           expect(sut.matches.indexOf('##.#.#.##')).not.toBe(-1);
-          expect(sut.matches.indexOf('###...###')).not.toBe(-1);
-          expect(sut.matches.indexOf('#.##.##.#')).not.toBe(-1);
           expect(sut.matches.indexOf('.###.###.')).not.toBe(-1);
         });
       });
@@ -119,7 +125,7 @@ describe('day 21 rule class', () => {
       describe('and the rule matches a rotated version of the block', () => {
         it('should return true', () => {
           sut = new Rule('#../..#/..# => ..../....');
-          let block = new Block(0, 0, 3, [['.', '#', '.'], ['.', '.', '.'], ['.', '#', '#']]);
+          let block = new Block(0, 0, 3, [['.', '.', '#'], ['.', '.', '.'], ['#', '#', '.']]);
           expect(sut.matchesBlock(block)).toBe(true);
         });
       });

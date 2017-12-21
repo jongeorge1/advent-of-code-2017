@@ -1,18 +1,15 @@
 class Rule {
   constructor(input) {
-    // ##/## => #.#/#../###
-    let components = input.split(' => ');
-    this.input = input;
-    this.processRule(components[0]);
-    this.processResult(components[1]);
+    if (input) {
+      let components = input.split(' => ');
+      this.input = input;
+      this.processRule(components[0]);
+      this.processResult(components[1]);
+    }
   }
 
   processRule(input) {
-    let center;
-    input = input.split('/').join('');
-
     this.matches = this.getAllRotations(input);
-    this.addAllFlips(input, this.matches);
   }
 
   matchesBlock(block) {
@@ -27,53 +24,47 @@ class Rule {
   getAllRotations(input) {
     let results = [];
 
-    let is3 = input.length === 9;
-    let center = is3 ? input.substr(4, 1) : undefined;
+    let rows = input.split('/');
+rows;
+    results.push(...this.getRotations(rows.join('')));
 
-    input = this.mapToRotatableString(input);
-    results.push(input);
+    // rows = rows.map(el => {
+    //   let x = el.split('');
+    //   x.reverse();
+    //   return x.join('');
+    // });
+rows;
+    rows.reverse();
+    rows;
+    
+    results.push(...this.getRotations(rows.join('')));
 
-    for (let i = 1; i < input.length; i++) {
-      let curr = input.substr(i) + input.substr(0, i);
-      if (results.indexOf(curr) === -1) {
-        results.push(curr);
-      }
-    }
-
-    return results.map(el => this.mapFromRotatableString(el, center));
+    results = new Set(results);
+    results = Array.from(results);
+    return results;
   }
 
-  addAllFlips(input, arr) {
+  getRotations(input) {
+    let results = [];
+    input;
+
     if (input.length === 4) {
-      return [];
+      return [
+        input,
+        input[2] + input[0] + input[3] + input[1],
+        input[3] + input[2] + input[1] + input[0],
+        input[1] + input[3] + input[0] + input[2]
+      ]
     }
 
-    let top = input.substr(0, 3);
-    let middle = input.substr(3, 3);
-    let bottom = input.substr(6, 3);
+    return [
+      input,
+      input[6] + input[3] + input[0] + input[7] + input[4] + input[1] + input[8] + input[5] + input[2],
+      input[8] + input[7] + input[6] + input[5] + input[4] + input[3] + input[2] + input[1] + input[0],
+      input[2] + input[5] + input[8] + input[1] + input[4] + input[7] + input[0] + input[3] + input[6]
+    ]
 
-    let yFlip = bottom + middle + top;
-
-    if (arr.indexOf(yFlip) === -1) {
-      arr.push(yFlip);
-    }
-
-    top = top.split('');
-    top.reverse();
-    top = top.join('');
-
-    bottom = bottom.split('');
-    bottom.reverse();
-    bottom = bottom.join('');
-
-    middle = middle.split('');
-    middle.reverse();
-    middle = middle.join('');
-
-    let xFlip = top + middle + bottom;
-    if (arr.indexOf(xFlip) === -1) {
-      arr.push(xFlip);
-    }
+    return [input];
   }
 
   mapToRotatableString(input) {
