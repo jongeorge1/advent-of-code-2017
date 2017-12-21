@@ -3,8 +3,7 @@ let Rule = require('./rule');
 
 class Day21Part1 {
   process(input, iterations) {
-    // iterations = iterations || 5;
-    iterations = iterations || 18;
+    iterations = iterations || 5;
     let rules = input.split('\r\n').map(el => new Rule(el));
 
     let grid = [
@@ -14,7 +13,7 @@ class Day21Part1 {
     ];
 
     for (let i = 0; i < iterations; i++) {
-      // console.log('Iteration ' + i);
+      console.log('Iteration ' + i);
       let blocks = this.block(grid);
       grid = this.unblock(grid, blocks, rules)
       // console.log('Iteration ' + i + ' complete, grid size is ' + grid.length);
