@@ -25,18 +25,9 @@ class Rule {
     let results = [];
 
     let rows = input.split('/');
-rows;
     results.push(...this.getRotations(rows.join('')));
 
-    // rows = rows.map(el => {
-    //   let x = el.split('');
-    //   x.reverse();
-    //   return x.join('');
-    // });
-rows;
     rows.reverse();
-    rows;
-    
     results.push(...this.getRotations(rows.join('')));
 
     results = new Set(results);
@@ -65,31 +56,6 @@ rows;
     ]
 
     return [input];
-  }
-
-  mapToRotatableString(input) {
-    if (input.length === 4) {
-      return input.substr(0, 2) + input.substr(3, 1) + input.substr(2, 1);
-    }
-
-    let topRow = input.substr(0, 3);
-    let bottomRow = input.substr(6, 3).split('');
-    bottomRow.reverse();
-    bottomRow = bottomRow.join('');
-
-    return topRow + input.substr(5, 1) + bottomRow + input.substr(3, 1);
-  }
-
-  mapFromRotatableString(input, center) {
-    if (input.length === 4) {
-      return input.substr(0, 2) + input.substr(3, 1) + input.substr(2, 1);
-    }
-
-    let topRow = input.substr(0, 3);
-    let bottomRow = input.substr(4, 3).split('');
-    bottomRow.reverse();
-    bottomRow = bottomRow.join('');
-    return topRow + input.substr(7, 1) + center + input.substr(3, 1) + bottomRow;
   }
 }
 
