@@ -51,36 +51,4 @@ describe('day 22 map class', () => {
       expect(sut.addInfectedCount).toBe(1);
     });
   });
-
-  describe('when told to toggle a cell', () => {
-    describe('and the cell is infected', () => {
-      beforeEach(() => {
-        sut.toggleInfected(1, -1);
-      });
-  
-      it('should set the cell to uninfected', () => {
-        expect(sut.infected.length).toBe(1);
-        expect(sut.isInfected(1, -1)).toBe(false);
-      });
-  
-      it('should not change the add infected count', () => {
-        expect(sut.addInfectedCount).toBe(0);
-      });
-    });
-
-    describe('and the cell is not infected', () => {
-      beforeEach(() => {
-        sut.toggleInfected(0, 0);
-      });
-  
-      it('should set the cell to infected', () => {
-        expect(sut.infected.length).toBe(3);
-        expect(sut.isInfected(0, 0)).toBe(true);
-      });
-  
-      it('should increment the add infected count', () => {
-        expect(sut.addInfectedCount).toBe(1);
-      });
-    });
-  });
 });

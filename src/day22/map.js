@@ -35,14 +35,6 @@ class Map {
     }
   }
 
-  toggleInfected(x, y) {
-    if (this.isInfected(x, y)) {
-      this.clearInfected(x, y);
-    } else {
-      this.addInfected(x, y);
-    }
-  }
-
   isInfected(x, y) {
     let key = this.key(x, y);
     return this.infected.indexOf(key) !== -1;
