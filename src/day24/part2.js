@@ -26,40 +26,50 @@ class Day24Part2 {
     this.components = components;
   }
 
-  getHighestBridgeStrengthFrom(startPort, usedComponentIds) {
-    // console.log('looking for bridges from ' + startPort);
-    let availableComponentIds = this.portMap.get(startPort).filter(el => usedComponentIds.indexOf(el) === -1);
+  findBridgesFrom(startPort, componentsToHere) {
+    let availableComponentIds = this.portMap.get(startPort).filter(el => componentsToHere.indexOf(el) === -1);
 
     if (availableComponentIds.length === 0) {
-      // console.log(`Found nothing from ${startPort}`);
-      return 0;
+      if (this.maximumLengthSoFar <= componentsToHere.length) {
+        this.possibleBridges.push(componentsToHere);
+        this.maximumLengthSoFar = componentsToHere.length;
+      }
+      return;
     }
 
-    let strengths = [];
+    let bridgesFromHere = [];
 
     for (let componentId of availableComponentIds) {
       let component = this.componentMap.get(componentId);
-      // console.log(`Found matching component from ${startPort}: ${component.id}, [${component.ports[0]}, ${component.ports[1]}]`);
-      let used = usedComponentIds.slice();
-      used.push(component.id);
+      let thisBridge = componentsToHere.slice();
+      thisBridge.push(component.id);
 
-      // What's the other side of the port...
       let otherSide = component.ports.slice();
       otherSide.splice(otherSide.indexOf(startPort), 1);
       otherSide = otherSide[0];
       
-      let strengthFromHere = component.strength + this.getHighestBridgeStrengthFrom(otherSide, used);
-      strengths.push(strengthFromHere);
-      // console.log(`Found a bridge from ${startPort} with a strength of ${strengthFromHere}`);
+      this.findBridgesFrom(otherSide, thisBridge);
     }
+  }
 
-    return Math.max(...strengths);
+  logBridge(ids) {
+    console.log(ids.map(el => this.componentMap.get(el)).map(el => el.ports[0] + '/' + el.ports[1]).join('--'));
   }
 
   process(input) {
+    this.maximumLengthSoFar = 0;
+    this.possibleBridges = [];
     this.buildPortMap(input);
     
-    return this.getHighestBridgeStrengthFrom(0, []);
+    this.findBridgesFrom(0, []);
+    
+    let bridgeLengths = this.possibleBridges.map(el => el.length);
+
+    let longestBridgeLength = Math.max.apply(null, bridgeLengths);
+
+    let longestBridges = this.possibleBridges.filter(el => el.length === longestBridgeLength);
+    let strengths = longestBridges.map(el => el.reduce((acc, x) => acc += this.componentMap.get(x).strength, 0));
+    return Math.max(...strengths);
   }
 }
 
